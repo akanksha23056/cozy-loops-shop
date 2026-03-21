@@ -14,7 +14,147 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          message: string
+          name: string
+          phone: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message: string
+          name: string
+          phone?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string
+          name?: string
+          phone?: string | null
+        }
+        Relationships: []
+      }
+      order_items: {
+        Row: {
+          id: string
+          order_id: string
+          price_at_purchase: number
+          product_id: string
+          quantity: number
+        }
+        Insert: {
+          id?: string
+          order_id: string
+          price_at_purchase: number
+          product_id: string
+          quantity: number
+        }
+        Update: {
+          id?: string
+          order_id?: string
+          price_at_purchase?: number
+          product_id?: string
+          quantity?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string
+          custom_note: string | null
+          customer_address: string
+          customer_name: string
+          customer_phone: string
+          id: string
+          payment_status: string
+          total_amount: number
+          upi_transaction_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          custom_note?: string | null
+          customer_address: string
+          customer_name: string
+          customer_phone: string
+          id?: string
+          payment_status?: string
+          total_amount: number
+          upi_transaction_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          custom_note?: string | null
+          customer_address?: string
+          customer_name?: string
+          customer_phone?: string
+          id?: string
+          payment_status?: string
+          total_amount?: number
+          upi_transaction_id?: string | null
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          border_color: string | null
+          category: string
+          created_at: string
+          description: string | null
+          emoji: string | null
+          id: string
+          image_url: string | null
+          name: string
+          price: number
+          stock_quantity: number
+        }
+        Insert: {
+          border_color?: string | null
+          category: string
+          created_at?: string
+          description?: string | null
+          emoji?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          price: number
+          stock_quantity?: number
+        }
+        Update: {
+          border_color?: string | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          emoji?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          price?: number
+          stock_quantity?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
